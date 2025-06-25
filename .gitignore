@@ -1,3 +1,4 @@
 .env
 llms/
 __pycache__/
+.venv/
