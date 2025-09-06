@@ -1,0 +1,29 @@
+name: dev-env
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - numpy
+  - psycopg
+  - gh
+  - sqlalchemy
+  - pandas
+  - matplotlib
+  - seaborn
+  - scikit-learn
+  - jupyterlab
+  - notebook
+  - ipywidgets
+  - plotly
+  - tqdm
+  - pytorch
+  - torchvision
+  - torchaudio
+  - pip
+  - pip:
+      - pyarrow
+      - xgboost
+      - lightgbm
+      - kaleido  
