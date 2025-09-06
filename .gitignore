@@ -2,3 +2,4 @@
 llms/
 __pycache__/
 .venv/
+db/
