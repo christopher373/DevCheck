@@ -1,0 +1,51 @@
+name: dev-check
+
+services:
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: user
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - ./services/mongodb/db:/data/db
+
+  react:
+    depends_on:
+      - fastapi
+    image: dev-check/react
+    build: 
+      context: ./services/react
+      dockerfile: Dockerfile
+    ports:
+      - "${FRONTEND_PORT}:${FRONTEND_PORT}"
+    environment:
+      - FRONTEND_PORT=${FRONTEND_PORT}
+      - FRONTEND_HOST=${FRONTEND_HOST}
+      - VITE_BACKEND_URL=${BACKEND_HOST}:${BACKEND_PORT}
+      - CHOKIDAR_USEPOLLING=true
+    command: npm run dev
+    volumes:
+      - ./services/react/service:/service
+      - /service/node_modules
+
+  fastapi:
+    image: dev-check/fastapi
+    build: 
+      context: ./services/fastapi
+      dockerfile: Dockerfile  
+    ports: 
+      - "${BACKEND_PORT}:${BACKEND_PORT}"
+    environment:
+      - BACKEND_HOST=${BACKEND_HOST}
+      - BACKEND_PORT=${BACKEND_PORT}
+      - FRONTEND_HOST=${FRONTEND_HOST}
+      - FRONTEND_PORT=${FRONTEND_PORT}
+      - NOTEBOOKS_PATH=/notebooks
+    command: uvicorn main:app --host 0.0.0.0 --port ${BACKEND_PORT} --reload
+    volumes:
+      - ./services/fastapi/service:/service
+      - ./notebooks:/notebooks
+
+

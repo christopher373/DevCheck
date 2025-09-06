@@ -1,4 +1,0 @@
-alpha-vantage
-clearml
-fastapi[standard]
-openpyxl

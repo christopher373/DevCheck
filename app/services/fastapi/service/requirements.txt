@@ -1,0 +1,7 @@
+fastapi
+uvicorn[standard]
+pydantic
+motor
+nbformat
+nbconvert
+pydantic-settings

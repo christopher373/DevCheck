@@ -1,9 +1,0 @@
-jupyter
-ipykernel
-numpy
-pandas
-plotly
-scikit-learn
-psycopg2
-huggingface_hub
-transformers
